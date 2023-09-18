@@ -130,7 +130,7 @@ spec:
                 secretKeyRef:
                   name: {{ if .Values.existingSecret }}{{ .Values.existingSecret }}{{ else }}{{ template "minio.fullname" . }}{{ end }}
                   key: secretkey
-            {{- if .Values.gcsgateway.enabled }}
+            {{- if and .Values.gcsgateway.enabled (.Values.gcsgateway.authKsa | not) }}
             - name: GOOGLE_APPLICATION_CREDENTIALS
               value: "/etc/credentials/gcs_key.json"
             {{- end }}

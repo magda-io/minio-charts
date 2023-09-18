@@ -13,16 +13,16 @@ clusterDomain: cluster.local
 ## Set default image, imageTag, and imagePullPolicy. mode is used to indicate the
 ##
 image:
-  repository: minio/minio
-  tag: RELEASE.2020-09-26T03-44-56Z
+  repository: ghcr.io/magda-io/minio
+  tag: "7.1.2"
   pullPolicy: IfNotPresent
 
 ## Set default image, imageTag, and imagePullPolicy for the `mc` (the minio
 ## client used to create a default bucket).
 ##
 mcImage:
-  repository: minio/mc
-  tag: RELEASE.2020-09-23T20-02-13Z
+  repository: ghcr.io/magda-io/minio-mc
+  tag: "7.1.2"
   pullPolicy: IfNotPresent
 
 ## Set default image, imageTag, and imagePullPolicy for the `jq` (the JSON
@@ -276,6 +276,10 @@ gcsgateway:
   gcsKeyJson: ""
   # Google cloud project-id
   projectId: ""
+  # When set to true, will use KSA (Kubernetes Service Account) to access GCS via [workload identity](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity).
+  # You only can use this option if you are running on GKE (Google Kubernetes Engine). 
+  # And when use this option, no GCP JSON key file is required.
+  authKsa: false
 
 ## Use minio on NAS backend
 ## https://docs.minio.io/docs/minio-gateway-for-nas
